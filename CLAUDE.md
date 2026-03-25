@@ -26,11 +26,22 @@ Hello world/
 ├── requirements.txt    # Python dependencies (Flask, anthropic, python-dotenv, gunicorn)
 ├── Procfile            # Railway/hosting: web: gunicorn app:app
 ├── .env                # API key (not committed)
-└── .gitignore          # Excludes .venv, __pycache__, .env
+├── .gitignore          # Excludes .venv, __pycache__, .env
+├── README.md           # GitHub project page with setup and deployment guide
+└── CLAUDE.md           # This file — project context for Claude Code
 ```
+
+## Users and Default Experience
+- **Euty**: "25 years private equity and global listed markets investing"
+- **Simon**: "20 years private equity experience. 5 years AI coding, research and development"
+- Both are pre-populated in the text areas on page load
+- Users can edit the text before submitting
 
 ## Key API Endpoint
 - `POST /suggest-apps` — accepts JSON `{"euty_experience": "...", "simon_experience": "..."}`, returns `{"suggestions": [{"title": "...", "description": "..."}, ...]}`
+- Uses Claude Haiku 4.5 (`claude-haiku-4-5-20251001`) with `max_tokens=1024`
+- System prompt forces JSON-only output; backend strips markdown fences as fallback
+- Both fields must be non-empty or the endpoint returns 400
 
 ## Deployment
 - Hosted on Railway, auto-deploys from GitHub: https://github.com/SGMurray06/hello-world
